@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap');
+
+*{
+  font-family: 'Poppins', sans-serif;
+}
+/* screen */
+
+/* work screen */
+
+.full-screen{
+  background-color: #E86D5E;
+  height: 100vh;
+}
+
+/* short break screen */
+.full-screen-short{
+  background-color: #6578DC;
+  height: 100vh;
+}
+
+.full-screen-long{
+  background-color: #5EA6E8;
+  height: 100vh;
+}
+
+/* end of screen */
+
+.option{
+  color: #393F5F;
+  font-size: 24px;
+  padding : 8px;
+  font-weight:700
+}
+
+.option:hover{
+  color: #393F5F;
+  text-decoration: none;
+}
+
+.switchOption{
+  background-color: #FFD095;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 20px;
+}
+
+.timer{
+  margin-top: 4rem;
+  margin-left: 11rem;
+  background-color: #FFD095;
+  height:300px;
+  width: 300px;
+  padding-top: 16%;
+  border-radius: 50%;
+}
+
+.timer-text{
+  font-size: 50px;
+  font-weight: 700;
+  color: #393F5F;
+}
+
+.buttonOption{
+  margin-top: 10%;
+  display: flex;
+  justify-content:space-around;
+  
+}
+
+.button{
+  width:100%;
+  font-size: 23px;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: 20px;
+  color: #393F5F;
+  background-color: #FFD095;
+  border: none;
+}
+
+
+.right-side{
+  position: relative;
+  left: 8%
+}
+
+.titleRightSide{
+  color: #393F5F;
+  font-weight: bold;
+  left: 18%;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+}
+
+.taskBackground{
+  background-color: #FFD095;
+  padding: 10px;
+  margin-top: 33px;
+  width: 30em;
+  border-radius: 20px;
+  color: #393F5F;
+}
+
+.deleteTask{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 30px;
+}
+
+.taskInfo{
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+}
+
+.taskInfo:hover,
+.deleteTask:hover{
+  cursor: pointer;
+}
+
+.mainTask{
+  font-weight: 700;
+  font-size: 24px;
+  display: flex;
+  align-self: center;
+  justify-content: flex-start;
+  margin-top: 3px;
+}
+
+.infoGuide{
+  position: relative;
+  float: right;
+  left: 1.3em;
+  font-size:35px;
+  bottom: 1.2em;
+  color: #393F5F;
+}
+
+.infoGuide:hover{
+  cursor: pointer;
+}
+
+
