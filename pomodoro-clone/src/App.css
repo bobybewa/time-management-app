@@ -42,6 +42,7 @@
   display: flex;
   justify-content: space-around;
   border-radius: 20px;
+  box-shadow: 10px 10px 5px #40535c;
 }
 
 .timer{
@@ -52,6 +53,7 @@
   width: 300px;
   padding-top: 16%;
   border-radius: 50%;
+  box-shadow: 10px 10px 5px #40535c;
 }
 
 .timer-text{
@@ -78,6 +80,21 @@
   border: none;
 }
 
+.tour3{
+  box-shadow: 10px 10px 5px #40535c;
+}
+
+.tour2{
+  box-shadow: 10px 10px 5px #40535c;
+}
+
+.buttonJoinChat{
+  box-shadow: 10px 10px 5px #40535c;
+}
+
+.buttonPlayingGame{
+  box-shadow: 10px 10px 5px #40535c;
+}
 
 .right-side{
   position: relative;
@@ -90,6 +107,7 @@
   left: 18%;
   position: relative;
   font-family: 'Poppins', sans-serif;
+  
 }
 
 .taskBackground{
@@ -99,6 +117,7 @@
   width: 30em;
   border-radius: 20px;
   color: #393F5F;
+  box-shadow: 10px 10px 5px #40535c;
 }
 
 .deleteTask{
@@ -131,14 +150,13 @@
 .infoGuide{
   position: relative;
   float: right;
-  left: 1.3em;
-  font-size:35px;
-  bottom: 1.2em;
+  left: 2em;
+  font-size:15px;
+  bottom: 2em;
   color: #393F5F;
 }
 
 .infoGuide:hover{
   cursor: pointer;
 }
-
 
