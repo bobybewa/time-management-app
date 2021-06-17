@@ -1,0 +1,71 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.box{
+    background-color: #7a8dec;
+    padding: 20px;
+    width: 58vh;
+    height: 70vh;
+    border-radius: 20px;
+    box-shadow: 10px 10px 5px #2b353a;
+}
+
+.chatBox{
+    background-color: #6578DC;
+    padding: 10px;
+    height: 55vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.sendButton{
+    font-size: 35px;
+    position: relative;
+    right: 20px;
+    padding-top: 5px;
+    color: #fdc650
+}
+
+.sendButton:hover{
+    cursor: pointer;
+}
+
+.mainChat{
+    font-size: 23px;
+    color: #FFD095;
+    font-weight: bold;
+    background-color: #7187f7;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.ownChat{
+    font-size: 23px;
+    color: #FFD095;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #7a8dec;
+}
+
+
+.spanOwnChat{
+    color: #FFD095 !important;
+    font-size: 10px;
+    position: relative;    
+}
+
+.spanmainChat{
+    color: #FFD095 !important;
+    font-size: 10px;
+    
+}
+
+.title{
+    color: #FFD095;
+}

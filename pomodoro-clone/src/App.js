@@ -7,34 +7,14 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTask as deletingTask, tasksCleared} from './store/action'
 import Toast from './helpers/toast'
+import steps from './helpers/stepsGuide'
 import Swal from 'sweetalert2'
 import TaskAdd from './components/modal/addTask.jsx'
-import Login from './components/modal/login'
+import Login from './components/modal/login.jsx'
+import ChatBox from './components/chat/chat'
 import Tour from 'reactour'
 import anime from 'animejs/lib/anime.es.js';
-const steps = [
-  {
-    selector: '.tour1',
-    content: 'Work or Study with yourself',
-  },
-  {
-    selector: '.tour2',
-    content: 'Add Your Task',
-  },
-  {
-    selector: '.tour3',
-    content: 'Start the time and completing your task',
-  },
-  {
-    selector: '.tour4',
-    content: 'Take a short break to chat with another people or do something to refresh yourself',
-  },
-  {
-    selector: '.tour5',
-    content: 'Take a long break to playing simple game or do something to refresh yourself',
-  },
-  // ...
-];
+
 function App() {
   // use state and dispatch
   const [timer, setTimer] = useState(10) 
@@ -42,6 +22,8 @@ function App() {
   const [showLogin, setShowLogin] = useState(false)
   const [selectOption, setSelectOption] = useState('work')
   const [isTourOpen, setIsTourOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(false)
+  const [user, setUser] = useState('')
   const tasks = useSelector(state => state.todos)
   const dispatch = useDispatch()
 
@@ -63,6 +45,8 @@ function App() {
       easing: 'easeInOutSine'
     });
   },[tasks])
+
+  
   // function
   function startTimer(){
     setIsTourOpen(true)
@@ -98,6 +82,7 @@ function App() {
       })
     }
   }
+  
   function deleteTask(id){
     Swal.fire({
       title: 'Do you want to delete this task?',
@@ -111,6 +96,7 @@ function App() {
     })
     
   }
+  
   function deleteAllTaks(){
     Swal.fire({
       title: 'Do you want to delete all task?',
@@ -129,6 +115,11 @@ function App() {
 
   function changeOption(payloadOption){
     setSelectOption(payloadOption)
+  }
+
+  function leftChat(){
+    localStorage.removeItem('user')
+    setSelectOption('work')
   }
   return (
     <>
@@ -165,7 +156,7 @@ function App() {
                       <button className="button tour3" onClick={startTimer}>Pause</button>
                     </div>
                     <div className="col-6">
-                      {tasks.length < 5 ? <button className="button tour2" onClick={showModal}>Add Task</button> : <button className="button" onClick={deleteAllTaks} >Clear Task</button>
+                      {tasks.length < 5 ? <button className="button tour2" onClick={showModal}>Add Task</button> : <button className="button tour2" onClick={deleteAllTaks} >Clear Task</button>
                       }
                     </div>
                   </div>
@@ -220,13 +211,15 @@ function App() {
                         <button className="button tour3" onClick={startTimer}>Start</button>
                       </div>
                       <div className="col-6">
-                        <button className="button" onClick={showLoginForm}>Join Chat</button>
+                        {
+                          localStorage.getItem('user') ? <button className="button buttonJoinChat" onClick={leftChat}>Left Chat</button> : <button className="button buttonJoinChat" onClick={showLoginForm}>Join Chat</button>
+                        }
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="col-4 right-side">
-                  
+                  <ChatBox/>
                 </div>
               </div>
             </div>
@@ -254,7 +247,7 @@ function App() {
                       <button className="button tour3" onClick={startTimer}>Start</button>
                     </div>
                     <div className="col-6">
-                      <button className="button">Playing Game</button>
+                      <button className="button buttonPlayingGame">Playing Game</button>
                     </div>
                   </div>
                 </div>
