@@ -4,22 +4,31 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addNewTask } from '../../store/action'
 import Toast from '../../helpers/toast'
 export default function TaskAdd(props){
-    const [newTask, setNewTask] = useState()
+    const [newTask, setNewTask] = useState('')
     const tasks = useSelector(state => state.todos)
     const dispatch = useDispatch()
     function handleClose(){
         if(tasks.length < 5){
-            dispatch(addNewTask({
-                id : tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
-                task: newTask,
-                status: false
-            }))
+            if(newTask !== ''){
+                dispatch(addNewTask({
+                    id : tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
+                    task: newTask,
+                    status: false
+                }))
+                setNewTask('')
+            }else{
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Fill the blank'
+                })
+            }
         }else{
             Toast.fire({
                 icon: 'error',
                 title: 'Too many Task'
             })
         }
+        setNewTask('')
         props.onHide()
     }
     function handleChange(e){
