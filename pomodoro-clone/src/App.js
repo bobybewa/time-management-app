@@ -11,19 +11,22 @@ import steps from './helpers/stepsGuide'
 import Swal from 'sweetalert2'
 import TaskAdd from './components/modal/addTask.jsx'
 import Login from './components/modal/login.jsx'
+import Contact from './components/modal/contact'
 import ChatBox from './components/chat/chat'
 import Tour from 'reactour'
 import anime from 'animejs/lib/anime.es.js';
+import TimerSet from './components/timer/setTimer'
 
 function App() {
   // use state and dispatch
   const [timer, setTimer] = useState(10) 
   const [show, setShow] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
+  const [formContact, setFormContact] = useState('')
   const [selectOption, setSelectOption] = useState('work')
   const [isTourOpen, setIsTourOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(false)
-  const [user, setUser] = useState('')
+  const [isPlay, setIsPlay] = useState(false)
+  const [gameStart, setGameStart] = useState(false)
   const tasks = useSelector(state => state.todos)
   const dispatch = useDispatch()
 
@@ -49,7 +52,9 @@ function App() {
   
   // function
   function startTimer(){
-    setIsTourOpen(true)
+    if(selectOption !== 'long'){
+      setIsPlay(!isPlay)
+    }
   }
 
   function showGuide(){
@@ -114,12 +119,45 @@ function App() {
   }
 
   function changeOption(payloadOption){
-    setSelectOption(payloadOption)
+    if(isPlay && selectOption !== payloadOption){
+      Swal.fire({
+        title: 'it will reset your time',
+        showCancelButton: true,
+      }).then((result) => {
+        console.log(result, 'result');
+        if (result.isConfirmed) {
+          setIsPlay(false)
+          setSelectOption(payloadOption)
+        }
+      })
+    }else{
+      setSelectOption(payloadOption)
+    }
   }
 
   function leftChat(){
     localStorage.removeItem('user')
     setSelectOption('work')
+    setIsPlay(false)
+  }
+
+  function announcement(){
+    Swal.fire({
+      title: "Sorry. I have a test now, and that's way I can't develop the game now. I will develop later. do you have some message for me? please contact me. thank you",
+      width: 600,
+      padding: '3em',
+      backdrop: `
+      rgb(102, 128, 255)
+      url("https://sweetalert2.github.io/images/nyan-cat.gif")
+        left top
+        no-repeat
+      `
+    })
+    setGameStart(true)
+  }
+
+  function showContact(){
+    setFormContact(true)
   }
   return (
     <>
@@ -148,12 +186,11 @@ function App() {
                     <a href="#long" className="option tour5" onClick={() => changeOption('long')}>Long Break </a>
                   </div>
                   <BsFillInfoCircleFill className="infoGuide" onClick={showGuide}/>
-                  <div className="timer">
-                    <h1 className="text-center timer-text">30:00</h1>
-                  </div>
+                  <TimerSet initialMinute={30} initialSeconds={0} isPlay={isPlay} history={selectOption}/>
+                  
                   <div className="row buttonOption">
                     <div className="col-6">
-                      <button className="button tour3" onClick={startTimer}>Pause</button>
+                      <button className="button tour3" onClick={startTimer}>{isPlay ? 'Pause' : 'Start'}</button>
                     </div>
                     <div className="col-6">
                       {tasks.length < 5 ? <button className="button tour2" onClick={showModal}>Add Task</button> : <button className="button tour2" onClick={deleteAllTaks} >Clear Task</button>
@@ -203,12 +240,10 @@ function App() {
                       <a href="#short" className="option tour4" onClick={() => changeOption('short')}>Short Break</a> { }
                       <a href="#long" className="option tour5" onClick={() => changeOption('long')}>Long Break </a>
                     </div>
-                    <div className="timer">
-                      <h1 className="text-center timer-text">05:00</h1>
-                    </div>
+                    <TimerSet initialMinute={5} initialSeconds={0} isPlay={isPlay} history={selectOption}/>
                     <div className="row buttonOption">
                       <div className="col-6">
-                        <button className="button tour3" onClick={startTimer}>Start</button>
+                        <button className="button tour3" onClick={startTimer}>{isPlay ? 'Pause' : 'Start'}</button>
                       </div>
                       <div className="col-6">
                         {
@@ -243,12 +278,13 @@ function App() {
                     <h1 className="text-center timer-text">10:00</h1>
                   </div>
                   <div className="row buttonOption">
-                    <div className="col-6">
-                      <button className="button tour3" onClick={startTimer}>Start</button>
+                    <div className="col-12">
+                      {gameStart ? <button className="button tour3" onClick={showContact}>Contact Me</button> : <button className="button buttonPlayingGame" onClick={announcement}>Playing Game</button>}
                     </div>
-                    <div className="col-6">
-                      <button className="button buttonPlayingGame">Playing Game</button>
-                    </div>
+
+                    {/* <div className={gameStart ? 'col-6' : 'col-12'}>
+                      <button className="button buttonPlayingGame" onClick={announcement}>Playing Game</button>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -257,6 +293,7 @@ function App() {
               </div>
             </div>
           </div>
+          <Contact show={formContact} onHide={() => setFormContact(false)}/>
         </div>
       }
     {/* end of long break page*/}
