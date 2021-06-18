@@ -3,6 +3,7 @@ import { Form } from 'react-bootstrap'
 import { MdSend } from 'react-icons/md'
 import socket from '../../helpers/corsForSocket'
 import './chat.css'
+import Toast from '../../helpers/toast'
 export default function ChatBox(){
     
     const [chat, setChat] = useState([])
@@ -15,7 +16,6 @@ export default function ChatBox(){
             console.log(data, 'ini data');
             setChat([...chat, data])
         })
-        // console.log(chat);
     },[chat])
 
     function handleChange(e){
@@ -25,17 +25,24 @@ export default function ChatBox(){
     }
 
     function handleSend(){
-        const data ={
-            name,
-            message
+        if(message){
+            const data ={
+                name,
+                message
+            }
+            socket.emit('message', data)
+        }else{
+            Toast.fire({
+                icon: 'error',
+                title: "can't send this message"
+            })
         }
-        socket.emit('message', data)
         setMessage('')
     }
 
     function renderChat(){
         return chat.map(({name, message}, index) => (
-            <p className={userLog === name ? 'ownChat' : 'mainChat'} key={index}><span className={userLog === name ? 'spanOwnChat' : 'spanmainChat'}>{name}</span>{message}</p>
+            <p className={userLog === name ? 'ownChat' : 'mainChat'} key={index}><span className={userLog === name ? 'spanOwnChat' : 'spanmainChat'}>{userLog === name ?'me': name}</span>{message}</p>
         ))
     }
     return(

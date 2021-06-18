@@ -10,6 +10,7 @@
     "animejs": "^3.2.1",
     "bootstrap": "^4.6.0",
     "cors": "^2.8.5",
+    "emailjs-com": "^3.1.0",
     "particles.js": "^2.0.0",
     "react": "^17.0.2",
     "react-animated-css": "^1.2.1",
