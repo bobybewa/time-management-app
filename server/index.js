@@ -21,7 +21,9 @@ io.on('connection', socket => {
         console.log(socket.id,'socket id keluar');
     })
 })
-
+app.get('/', (req,res) => {
+    res.send('welcome')
+})
 app.use(cors())
 http.listen(port, () => {
     console.log(`listening on ${port}`);
