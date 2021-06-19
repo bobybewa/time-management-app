@@ -7,7 +7,7 @@ const port = process.env.PORT || 8000
 
 const io = require("socket.io")(http, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "https://time-management-by-boby.web.app/",
     }
 });
 
