@@ -3,7 +3,7 @@ const app = express()
 const http = require('http').createServer(app)
 // const io = require('socket.io')(http)
 const cors = require('cors')
-const port = 8000
+const port = process.env.PORT || 8000
 
 const io = require("socket.io")(http, {
     cors: {
@@ -21,7 +21,9 @@ io.on('connection', socket => {
         console.log(socket.id,'socket id keluar');
     })
 })
-
+app.get('/', (req,res) => {
+    res.send('welcome')
+})
 app.use(cors())
 http.listen(port, () => {
     console.log(`listening on ${port}`);
